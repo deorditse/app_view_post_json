@@ -37,8 +37,8 @@ class ImplementAppStateGetXController extends GetxController {
       update();
     } on DioError catch (error) {
       errorMessage =
-          "Контент временно недоступен\nstatus ${error.response?.statusCode}";
-      print(error.message);
+          "Контент временно недоступен\nstatus ${error.response?.statusCode} DataDioPostsList";
+      print('${error.message} ____ from getDataDioPostsList');
       hasError = true;
       isLoadingPostsList = false;
       update();
@@ -46,5 +46,27 @@ class ImplementAppStateGetXController extends GetxController {
 
     isLoadingPostsList = false;
     update();
+  }
+
+  //обращение к слою данных за получением обновленного листа
+  Future<void> getRefreshListPosts() async {
+    //сделать сравнение старых и новых данных
+    try {
+      List<Post> newPostsList = await service.getPostsList();
+
+      ///написать по сравнению данных метод
+      // newPostsList.
+      update();
+    } on DioError catch (error) {
+      errorMessage =
+          "Контент временно недоступен\nstatus ${error.response?.statusCode} RefreshListPosts";
+      print('${error.message} ____ from getRefreshListPosts');
+      hasError = true;
+      isLoadingPostsList = false;
+      update();
+    }
+
+    //Если в ответе пришли новые посты, то мы помещаем их в начало списка.
+// Если в ответе пришли посты, которые уже были, то мы должны обновить информацию о них.
   }
 }

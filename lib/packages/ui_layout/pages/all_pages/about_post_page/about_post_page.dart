@@ -36,7 +36,18 @@ class AboutPostPage extends StatelessWidget {
                   )),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("like ${ups!}"),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.heart_broken,
+                          color: Colors.red,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text("${ups!}"),
+                      ],
+                    ),
                   ),
                 ],
               ),
