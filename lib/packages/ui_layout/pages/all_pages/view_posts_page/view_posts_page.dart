@@ -15,18 +15,16 @@ class ViewPostsPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Hotels'),
           toolbarHeight: 40,
-          actions: [
-            GetBuilder<ImplementAppStateGetXController>(
-              builder: (controller) => IconButton(
-                onPressed: () {
-                  controller.buildContentList = !controller.buildContentList;
-                },
-                icon: controller.buildContentList
-                    ? Icon(Icons.grid_view)
-                    : Icon(Icons.list),
-              ),
+          leading: GetBuilder<ImplementAppStateGetXController>(
+            builder: (controller) => IconButton(
+              onPressed: () {
+                controller.updateBuildContentList();
+              },
+              icon: controller.buildContentList
+                  ? Icon(Icons.grid_view)
+                  : Icon(Icons.list),
             ),
-          ],
+          ),
         ),
         body: GetBuilder<ImplementAppStateGetXController>(
           builder: (controller) => Container(
@@ -43,15 +41,15 @@ class ViewPostsPage extends StatelessWidget {
                           child: ListView.builder(
                               itemCount: controller.postsList.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return Text(controller.postsList[index].title);
+                                return
+                                    // Text(controller.postsList[index].title);
 
-                                //   PostCard(
-                                //   index: index,
-                                //   buildContentList: controller.buildContentList,
-                                //   title: controller.postsList[index].title,
-                                //   thumbnail:
-                                //       controller.postsList[index].thumbnail,
-                                // );
+                                    PostCard(
+                                  index: index,
+                                  title: controller.postsList[index].title,
+                                  thumbnail:
+                                      controller.postsList[index].thumbnail,
+                                );
                               }),
                         )
                       : Expanded(
@@ -63,7 +61,6 @@ class ViewPostsPage extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return PostCard(
                                   index: index,
-                                  buildContentList: controller.buildContentList,
                                   title: controller.postsList[index].title,
                                   thumbnail:
                                       controller.postsList[index].thumbnail,

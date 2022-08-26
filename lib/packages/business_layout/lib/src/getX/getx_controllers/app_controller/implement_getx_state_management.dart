@@ -16,11 +16,17 @@ class ImplementAppStateGetXController extends GetxController {
     super.onInit();
     getDataDioPostsList();
   }
+
   String errorMessage = '';
   bool hasError = false;
   bool isLoadingPostsList = false;
   bool buildContentList = true;
   List<Post> postsList = [];
+
+  void updateBuildContentList() {
+    buildContentList = !buildContentList;
+    update();
+  }
 
   void getDataDioPostsList() async {
     isLoadingPostsList = true;
