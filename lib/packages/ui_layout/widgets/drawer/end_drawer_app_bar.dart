@@ -100,24 +100,6 @@ class MyEndDrawer extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 40.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Выход'),
-                  style: styleButtonDrawer(null, null),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Регистрация'),
-                  style: styleButtonDrawer(null, null),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

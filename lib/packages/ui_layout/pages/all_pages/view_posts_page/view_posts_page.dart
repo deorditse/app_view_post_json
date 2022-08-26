@@ -1,5 +1,7 @@
 import 'package:app_view_post_json/packages/business_layout/lib/business_layout.dart';
 import 'package:app_view_post_json/packages/ui_layout/pages/all_pages/view_posts_page/post_card.dart';
+import 'package:app_view_post_json/packages/ui_layout/widgets/app_bar.dart';
+import 'package:app_view_post_json/packages/ui_layout/widgets/drawer/end_drawer_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,21 +13,8 @@ class ViewPostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white.withOpacity(0.9),
-        appBar: AppBar(
-          title: Text('Hotels'),
-          toolbarHeight: 40,
-          leading: GetBuilder<ImplementAppStateGetXController>(
-            builder: (controller) => IconButton(
-              onPressed: () {
-                controller.updateBuildContentList();
-              },
-              icon: controller.buildContentList
-                  ? Icon(Icons.grid_view)
-                  : Icon(Icons.list),
-            ),
-          ),
-        ),
+        endDrawer: MyEndDrawer(),
+        appBar: myAppBar('posts flutter dev', isButtonCheckContentList: true),
         body: GetBuilder<ImplementAppStateGetXController>(
           builder: (controller) => Container(
             child: Column(
@@ -43,12 +32,8 @@ class ViewPostsPage extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return
                                     // Text(controller.postsList[index].title);
-
                                     PostCard(
                                   index: index,
-                                  title: controller.postsList[index].title,
-                                  thumbnail:
-                                      controller.postsList[index].thumbnail,
                                 );
                               }),
                         )
@@ -61,9 +46,6 @@ class ViewPostsPage extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return PostCard(
                                   index: index,
-                                  title: controller.postsList[index].title,
-                                  thumbnail:
-                                      controller.postsList[index].thumbnail,
                                 );
                               }),
                         ),
