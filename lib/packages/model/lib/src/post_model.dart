@@ -1,31 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+// import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post_model.g.dart';
+
+part 'post_model.freezed.dart';
 //для запуска кодогенерации в текущем пакете flutter pub run build_runner build --delete-conflicting-outputs
 
 @JsonSerializable(explicitToJson: true)
 //explicitToJson - чтобы получать конвертацию в json а не Instance этого класса
-class Data {
-  final String? after;
-  final int? dist;
-  String? modhash = '';
-  String? geo_filter = '';
-  final Children children;
-
-  Data({
-    required this.after,
-    required this.dist,
-    required this.modhash,
-    required this.geo_filter,
-    required this.children,
-  });
-
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DataToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class Children {
   final String? kind;
   final Post data;
@@ -41,21 +23,51 @@ class Children {
   Map<String, dynamic> toJson() => _$ChildrenToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class Post {
-  final String? thumbnail;
-  String title;
-  final int? ups;
-  final String? selftext;
-
-  Post({
-    required this.thumbnail,
-    required this.title,
-    required this.ups,
-    required this.selftext,
-  });
+@freezed
+//реализация c использванием пакета freezed чтобы не переопределять операторы вручную, чтобы класы сравнивались не по ссылкам, а по значениям
+class Post with _$Post {
+  factory Post({
+    required String? thumbnail,
+    required String title,
+    required int? ups,
+    required String? selftext,
+  }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PostToJson(this);
 }
+
+// @JsonSerializable(explicitToJson: true)
+// //explicitToJson - чтобы получать конвертацию в json а не Instance этого класса
+// class Post {
+//   final String? thumbnail;
+//   String title;
+//   final int? ups;
+//   final String? selftext;
+//
+//   Post({
+//     required this.thumbnail,
+//     required this.title,
+//     required this.ups,
+//     required this.selftext,
+//   });
+//
+//   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+//
+//   Map<String, dynamic> toJson() => _$PostToJson(this);
+//
+//   @override
+//   bool operator ==(Object other) {
+//     if (identical(this, other)) {
+//       return true;
+//     }
+//     if (other.runtimeType != runtimeType) {
+//       return false;
+//     }
+//     return other is Post &&
+//         other.runtimeType == runtimeType &&
+//         other.thumbnail == thumbnail &&
+//         other.title == title &&
+//         other.ups == ups &&
+//         other.selftext == selftext;
+//   }
+// }

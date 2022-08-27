@@ -11,6 +11,7 @@ import '../api/storage_test.dart';
 //при использовании пакета freezed будет реализовано
 //регистрируем как LazySingleton (одиночный) но вытаскиваем по запросу ShoppingData
 class ImplementationShoppingCardServices {
+
   Future<List<Post>> getPostsList() async {
     final response =
         await Dio().get('https://www.reddit.com/r/flutterdev/new.json');
