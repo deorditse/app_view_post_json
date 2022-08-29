@@ -50,13 +50,12 @@ class ImplementAppStateGetXController extends GetxController {
       //обращение к слою данных за получением обновленного листа
       List<Post> newPostsList = await _service.getPostsList();
       Set<Post> newData = {};
-      int count = 0;
 
       for (var newPost in newPostsList) {
         if (postsList.contains(newPost)) {
           print('данные поста не изменились ни по одному параметру модели');
         } else {
-          count = newPostsList.indexOf(newPost);
+          final count = newPostsList.indexOf(newPost);
           print(count);
           if (newPost.title == postsList[count].title) {
             postsList[count] = newPost;
