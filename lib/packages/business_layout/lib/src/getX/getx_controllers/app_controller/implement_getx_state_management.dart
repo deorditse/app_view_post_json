@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:model/model.dart';
 
 class ImplementAppStateGetXController extends GetxController {
-  ImplementationPostsServices service = ImplementationPostsServices();
+  final ImplementationPostsServices _service = ImplementationPostsServices();//сервисный слой
 
   @override
   void onInit() {
@@ -28,7 +28,7 @@ class ImplementAppStateGetXController extends GetxController {
     update();
 
     try {
-      postsList = await service.getPostsList();
+      postsList = await _service.getPostsList();
       print(postsList.length);
       update();
     } on DioError catch (error) {
@@ -47,7 +47,7 @@ class ImplementAppStateGetXController extends GetxController {
   Future<void> getRefreshListPosts() async {
     try {
       //обращение к слою данных за получением обновленного листа
-      List<Post> newPostsList = await service.getPostsList();
+      List<Post> newPostsList = await _service.getPostsList();
       Set<Post> newData = {};
       int count = 0;
 
