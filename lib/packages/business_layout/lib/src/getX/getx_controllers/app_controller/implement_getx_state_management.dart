@@ -54,7 +54,7 @@ class ImplementAppStateGetXController extends GetxController {
 
       for (var newPost in newPostsList) {
         if (postsList.contains(newPost)) {
-          print('postsList.contains(newPost)');
+          print('данные поста не изменились ни по одному параметру модели');
         } else {
           count = newPostsList.indexOf(newPost);
           print(count);
@@ -64,7 +64,7 @@ class ImplementAppStateGetXController extends GetxController {
           } else {
             postsList.removeAt(count);
             newData.add(newPost);
-            print('newPost');
+            print('получен новый пост newPost');
           }
         }
       }
