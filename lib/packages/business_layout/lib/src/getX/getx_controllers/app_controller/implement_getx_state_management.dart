@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:model/model.dart';
 
 class ImplementAppStateGetXController extends GetxController {
-  final ImplementationPostsServices _service = ImplementationPostsServices();//сервисный слой
+  final ImplementationPostsServices _service =
+      ImplementationPostsServices(); //сервисный слой
 
   @override
   void onInit() {

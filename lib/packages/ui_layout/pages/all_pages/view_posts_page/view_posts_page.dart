@@ -13,48 +13,50 @@ class ViewPostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        endDrawer: MyEndDrawer(),
-        appBar: myAppBar('posts flutter dev', isButtonCheckContentList: true),
-        body: GetBuilder<ImplementAppStateGetXController>(
-          builder: (controller) => RefreshIndicator(
-            onRefresh: () => controller.getRefreshListPosts(),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (controller.isLoadingPostsList)
-                    Center(child: CircularProgressIndicator(color: Colors.red)),
-                  if (!controller.isLoadingPostsList && controller.hasError)
-                    Center(child: Text(controller.errorMessage)),
-                  if (!controller.isLoadingPostsList && !controller.hasError)
-                    controller.buildContentList
-                        ? Expanded(
-                            child: ListView.builder(
-                                itemCount: controller.postsList.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return
-                                      // Text(controller.postsList[index].title);
-                                      PostCard(
-                                    index: index,
-                                  );
-                                }),
-                          )
-                        : Expanded(
-                            child: GridView.builder(
-                                itemCount: controller.postsList.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return PostCard(
-                                    index: index,
-                                  );
-                                }),
+      endDrawer: MyEndDrawer(),
+      appBar: myAppBar('posts flutter dev', isButtonCheckContentList: true),
+      body: GetBuilder<ImplementAppStateGetXController>(
+        builder: (controller) => RefreshIndicator(
+          onRefresh: () => controller.getRefreshListPosts(),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (controller.isLoadingPostsList)
+                  Center(child: CircularProgressIndicator(color: Colors.red)),
+                if (!controller.isLoadingPostsList && controller.hasError)
+                  Center(child: Text(controller.errorMessage)),
+                if (!controller.isLoadingPostsList && !controller.hasError)
+                  controller.buildContentList
+                      ? Expanded(
+                          child: ListView.builder(
+                              itemCount: controller.postsList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return
+                                    // Text(controller.postsList[index].title);
+                                    PostCard(
+                                  index: index,
+                                );
+                              }),
+                        )
+                      : Expanded(
+                          child: GridView.builder(
+                            itemCount: controller.postsList.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2),
+                            itemBuilder: (BuildContext context, int index) {
+                              return PostCard(
+                                index: index,
+                              );
+                            },
                           ),
-                ],
-              ),
+                        ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
