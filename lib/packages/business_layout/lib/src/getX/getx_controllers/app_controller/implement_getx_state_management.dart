@@ -69,8 +69,8 @@ class ImplementAppStateGetXController extends GetxController {
       }
 
       postsList = [...newData, ...postsList];
-
       update();
+
     } on DioError catch (error) {
       errorMessage =
           "Контент временно недоступен\nstatus ${error.response?.statusCode} RefreshListPosts";
